@@ -1,6 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const baseUrl = 'http://localhost:4200';
 
 export const environment = {
   SERVER_URL: ``,
@@ -13,18 +14,20 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'http://127.0.0.1:44380',
+    issuer: 'https://localhost:44380',
+    redirectUri: baseUrl,
     clientId: 'SoMall_App',
     dummyClientSecret: '1q2w3e*',
-    scope: 'SoMall',
-    showDebugInformation: true,
-    oidc: true,
+    scope: 'offline_access openid profile role email phone SoMall',
+    // showDebugInformation: true,
+    // oidc: true,
     requireHttps: true,
   },
   apis: {
     default: {
-      url: 'http://127.0.0.1:44340',
-      signalR: "ws://127.0.0.1:44340"
+      url: 'https://localhost:44340',
+      signalR: "ws://localhost:44340",
+      rootNamespace: 'TT.SoMall',
     },
   },
   localization: {

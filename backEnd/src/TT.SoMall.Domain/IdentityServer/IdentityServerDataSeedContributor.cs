@@ -171,17 +171,16 @@ namespace TT.SoMall.IdentityServer
             {
                 var webClientRootUrl = configurationSection["SoMall_App:RootUrl"]?.TrimEnd('/');
 
-                var client = await CreateClientAsync(
+                await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"password", "client_credentials", "implicit", "UserWithTenant"},
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
                     secret: (configurationSection["SoMall_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
                     postLogoutRedirectUri: webClientRootUrl,
-                    corsOrigins: new[] {webClientRootUrl.RemovePostFix("/")}
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
-                client.AllowAccessTokensViaBrowser = true;
             }
 
             // Swagger Client
