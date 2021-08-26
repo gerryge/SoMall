@@ -16,10 +16,11 @@
     },
     "TT.SoMall.HttpApi.Host": {
       "commandName": "Project",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://*:44340"
+      "applicationUrl": "https://localhost:44340"
     },
     "Docker": {
       "commandName": "Docker",

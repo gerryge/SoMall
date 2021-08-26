@@ -16,11 +16,11 @@
     },
     "TT.SoMall.IdentityServer": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:44380",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://*:44380"
+      }
     },
     "Docker": {
       "commandName": "Docker",
