@@ -174,7 +174,7 @@ namespace TT.SoMall.IdentityServer
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    grantTypes: new[] { "password", "client_credentials", "implicit", "UserWithTenant" },
                     secret: (configurationSection["SoMall_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,

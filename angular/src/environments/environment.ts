@@ -17,11 +17,11 @@ export const environment = {
     issuer: 'https://localhost:44380',
     redirectUri: baseUrl,
     clientId: 'SoMall_App',
-    dummyClientSecret: '1q2w3e*',
-    scope: 'offline_access openid profile role email phone SoMall',
+    // responseType: 'code',
+    scope: 'SoMall',
     // showDebugInformation: true,
     // oidc: true,
-    requireHttps: true,
+    //requireHttps: true,
   },
   apis: {
     default: {
