@@ -156,12 +156,12 @@ namespace TT.SoMall.IdentityServer
                 await CreateClientAsync(
                     name: webClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"hybrid"},
+                    grantTypes: new[] { "hybrid" },
                     secret: (configurationSection["SoMall_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     redirectUri: $"{webClientRootUrl}signin-oidc",
                     postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
                     frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout",
-                    corsOrigins: new[] {webClientRootUrl.RemovePostFix("/")}
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
             }
 
@@ -171,16 +171,18 @@ namespace TT.SoMall.IdentityServer
             {
                 var webClientRootUrl = configurationSection["SoMall_App:RootUrl"]?.TrimEnd('/');
 
-                await CreateClientAsync(
-                    name: consoleAndAngularClientId,
-                    scopes: commonScopes,
-                    grantTypes: new[] { "password", "client_credentials", "implicit", "UserWithTenant" },
-                    secret: (configurationSection["SoMall_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
-                    requireClientSecret: false,
-                    redirectUri: webClientRootUrl,
-                    postLogoutRedirectUri: webClientRootUrl,
-                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
-                );
+                var client = await CreateClientAsync(
+                      name: consoleAndAngularClientId,
+                      scopes: commonScopes,
+                      grantTypes: new[] { "password", "client_credentials", "implicit", "UserWithTenant" },
+                      secret: (configurationSection["SoMall_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                      requireClientSecret: false,
+                      redirectUri: webClientRootUrl,
+                      postLogoutRedirectUri: webClientRootUrl,
+                      allowAccessTokensViaBrowser: true,
+                      corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                  );
+                //client.AllowAccessTokensViaBrowser = true;
             }
 
             // Swagger Client
@@ -192,11 +194,11 @@ namespace TT.SoMall.IdentityServer
                 await CreateClientAsync(
                     name: swaggerClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"authorization_code"},
+                    grantTypes: new[] { "authorization_code" },
                     secret: configurationSection["SoMall_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
-                    corsOrigins: new[] {swaggerRootUrl.RemovePostFix("/")}
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
                 );
             }
         }
@@ -212,7 +214,8 @@ namespace TT.SoMall.IdentityServer
             bool requireClientSecret = true,
             bool requirePkce = false,
             IEnumerable<string> permissions = null,
-            IEnumerable<string> corsOrigins = null)
+            IEnumerable<string> corsOrigins = null,
+            bool allowAccessTokensViaBrowser = false)
         {
             var client = await _clientRepository.FindByClientIdAsync(name);
             if (client == null)
@@ -235,7 +238,8 @@ namespace TT.SoMall.IdentityServer
                         RequireConsent = false,
                         FrontChannelLogoutUri = frontChannelLogoutUri,
                         RequireClientSecret = requireClientSecret,
-                        RequirePkce = requirePkce
+                        RequirePkce = requirePkce,
+                        AllowAccessTokensViaBrowser = allowAccessTokensViaBrowser
                     },
                     autoSave: true
                 );
