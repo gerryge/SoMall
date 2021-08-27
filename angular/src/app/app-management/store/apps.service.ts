@@ -14,7 +14,7 @@ export class AppsService {
     }
 
     getAll(params = {}) {
-        this.http.request<AppDtoPagedResultDto>('get', "/api/app/app/getList", params).pipe(
+        this.http.request<AppDtoPagedResultDto>('get', "/api/app/app/get-list", params).pipe(
             debounceTime(500)
         ).subscribe(res => {
             this.appsStore.set(res.items)
@@ -27,4 +27,4 @@ export class AppsService {
             filter: 'COMPLETED'
         });
     }
-} 
+}
