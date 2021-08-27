@@ -169,7 +169,7 @@ namespace TT.SoMall.IdentityServer
             var consoleAndAngularClientId = configurationSection["SoMall_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["SoMall_App:RootUrl"]?.TrimEnd('/');
+                var webClientRootUrl = configurationSection["SoMall_App:RootUrl"]?.EnsureEndsWith('/');
 
                 var client = await CreateClientAsync(
                       name: consoleAndAngularClientId,
@@ -177,7 +177,7 @@ namespace TT.SoMall.IdentityServer
                       grantTypes: new[] { "password", "client_credentials", "implicit", "UserWithTenant" },
                       secret: (configurationSection["SoMall_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                       requireClientSecret: false,
-                      redirectUri: webClientRootUrl,
+                      redirectUri: $"{webClientRootUrl}callback.html",
                       postLogoutRedirectUri: webClientRootUrl,
                       allowAccessTokensViaBrowser: true,
                       corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }

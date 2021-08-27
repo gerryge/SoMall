@@ -52,7 +52,7 @@ namespace TT.SoMall
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             Configure<AbpConventionalControllerOptions>(options =>
             {
-                options.UseV3UrlStyle = true;
+                options.UseV3UrlStyle = false;
             });
             context.Services.Replace(ServiceDescriptor.Transient<IConventionalRouteBuilder, TtConventionalRouteBuilder>());
             
