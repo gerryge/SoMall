@@ -24,9 +24,9 @@ namespace TT.Abp.Mall.Definitions
 {
     public class MallApplicationAutoMapperProfile : Profile
     {
-            public MallApplicationAutoMapperProfile()
-            {
-            CreateMap<MallUser, MallUserDto>();
+        public MallApplicationAutoMapperProfile()
+        {
+            CreateMap<MallUser, MallUserDto>().ReverseMap();
 
             #region Shops
 
