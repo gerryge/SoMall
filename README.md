@@ -1,5 +1,23 @@
 # SoMall 多租户多商户多应用开源平台
 
+[Angular CLI, Angular, Node.js, TypeScript, and RxJS version compatibility matrix](https://gist.github.com/LayZeeDK/c822cc812f75bb07b7c55d07ba2719b3). Officially part of the Angular documentation as of 2023-04-19 https://angular.io/guide/versions
+
+# Start
+
+## Prerequisites
+1. Angular: ~11.2.5
+2. Node.js: ^10.13.0 || ^12.11.0
+3. .NET 5.0
+4. Redis
+5. RabbitMQ
+
+## DB Migration
+Please run `TT.SoMall.DbMigrator` project.
+
+## Debug
+1. Start `TT.SoMall.IdentityServer` project
+2. Start `TT.SoMall.HttpApi.Host` project
+3. Start Angualr project
 
 **一个社交( Socail)+商城(Mall) 的开源学习项目**
 
